@@ -12,14 +12,17 @@
           integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
 </head>
-<div th:replace="components/navbar :: navbar(title='Register')"></div>
+<div th:replace="components/navbar :: navbar(title='Register', showLogout=false)"></div>
 <body class="container-fluid p-0">
 
 <div class="row justify-content-center p-4" style="margin-bottom: auto; margin-top: auto;">
     <div class="col col-xl-4">
         <div class="card">
+
             <div class="card-body">
-                <div th:if="${errorMessage != null}" class="alert alert-danger" role="alert">
+                <h5>Registration</h5>
+                <p>We're excited to have you on board as a new member of our community. With our platform, you'll be able to easily manage and organize your contacts, connect with friends and colleagues, and stay up-to-date on the latest industry developments. Let's get started and create your account today!</p>
+                <div th:if="${errorMessage != null}" class="alert alert-danger mt-3" role="alert">
                     [[${errorMessage}]]
                 </div>
                 <form action="#" th:action="@{/register}" th:object="${registerPayload}" method="post">
@@ -75,11 +78,9 @@
 
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary mt-2">Register</button>
+                    <button type="submit" class="btn btn-success mt-2">Register</button>
+                    <a type="button" class="btn btn-outline-success mt-2" href="/login">Back to login page</a>
                 </form>
-                <!--                <iframe src="registerForm.html"></iframe>-->
-
-
             </div>
         </div>
     </div>

@@ -7,13 +7,14 @@ import jakarta.validation.constraints.NotBlank;
 public class ContactPayload {
 
     private Integer id;
+
+    private Integer previewContactId;
     private User user;
     @NotBlank(message = "First name is required")
     private String firstName;
     @NotBlank(message = "Last name is required")
     private String lastName;
     private String phoneNumber;
-    @NotBlank(message = "Email is required")
     @Email(message = "Invalid email address", regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")
     private String email;
     private String address;
@@ -95,5 +96,13 @@ public class ContactPayload {
         payload.setPhoneNumber(contact.getPhoneNumber());
         payload.setAddress(contact.getAddress());
         return payload;
+    }
+
+    public Integer getPreviewContactId() {
+        return previewContactId;
+    }
+
+    public void setPreviewContactId(Integer previewContactId) {
+        this.previewContactId = previewContactId;
     }
 }

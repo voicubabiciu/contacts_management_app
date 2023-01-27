@@ -24,9 +24,8 @@ public class ContactsService {
     public Contact getContact(final Integer contactId){
         return bookRepository.findContactById(contactId);
     }
-    public void addNewContact(final ContactPayload payload, final User user){
+    public void addNewContact(final ContactPayload payload){
         final Contact contact = payload.toContact();
-        contact.setUser(user);
         bookRepository.saveAndFlush(contact);
     }
 

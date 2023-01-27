@@ -29,14 +29,21 @@ public class AppConfig extends SecurityConfigurerAdapter{
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                .csrf()
+                .disable()
                 .authorizeRequests()
-                .requestMatchers("/register", "/login").permitAll()
+                .requestMatchers("/register", "/login", "/logout").permitAll()
                 .requestMatchers("/contacts/**").hasAuthority("USER")
                 .and()
                 .formLogin()
                 .defaultSuccessUrl("/contacts/all")
                 .loginPage("/login")
                 .failureUrl("/login?error=true")
+                .permitAll()
+                .and()
+                .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login")
                 .permitAll();
         return http.build();
     }

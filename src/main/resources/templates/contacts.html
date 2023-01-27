@@ -12,7 +12,7 @@
           integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
 </head>
-<div th:replace="components/navbar :: navbar(title='Contacts')"></div>
+<div th:replace="components/navbar :: navbar(title='Contacts', showLogout=true)"></div>
 <body class="container-fluid p-0">
 
 <div class="p-4" style="margin-bottom: auto; margin-top: auto;">
@@ -20,7 +20,11 @@
     <div class="row">
         <div class="col col-xl-4 col-md-6 col-sm-12 col-xs-12">
             <h6> Contacts list</h6>
-            <div class="list-group">
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+            <div class="list-group mt-2">
                 <div th:each="contact : ${contacts}" class="list-group-item list-group-item-action">
                     <div class="row d-flex align-items-center p-2">
                         <div class="col-2 d-flex align-items-center justify-content-center">
@@ -36,17 +40,20 @@
                             [[${contact.getFirstName()}]] [[${contact.getLastName()}]]
                         </div>
                         <div class="col-1">
-                            <a th:href="@{/contacts/all?selectedContactId=__${contact.getId()}__}" class="btn btn-success">
+                            <a th:href="@{/contacts/all?editId=__${editId == null ?-1 :editId}__&selectedContactId=__${contact.getId()}__}"
+                               class="btn btn-success">
                                 <i class="fa-solid fa-eye"></i>
                             </a>
                         </div>
                         <div class="col-1">
-                            <a th:href="@{/contacts/edit?id=__${contact.getId()}__}" class="btn btn-warning">
+                            <a th:href="@{/contacts/edit?id=__${contact.getId()}__&selectedContactId=__${selectedContact == null ? -1 : selectedContact.getId()}__}"
+                               class="btn btn-warning">
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </a>
                         </div>
                         <div class="col-1">
-                            <a th:href="@{/contacts/delete?id=__${contact.getId()}__}" class="btn btn-danger">
+                            <a th:href="@{/contacts/delete?id=__${contact.getId()}__&editId=__${editId == null ?-1 :editId}__&selectedContactId=__${selectedContact == null ? -1 : selectedContact.getId()}__}"
+                               class="btn btn-danger">
                                 <i class="fa-solid fa-trash"></i>
                             </a>
                         </div>
@@ -60,16 +67,18 @@
                 <div th:if="@{${selectedContact == null }}" class="card">
                     <div class="card-body">
 
-                        <h2  class="text-center"> Select a contact to see
+                        <h2 class="text-center"> Select a contact to see
                             details</h2>
                     </div>
                 </div>
                 <div th:if="@{${selectedContact != null }}">
-                    <ul class="list-group">
-                        <li class="list-group-item"><strong>First name: </strong>[[${selectedContact.getFirstName}]]</li>
+                    <ul class="list-group m-0">
+                        <li class="list-group-item"><strong>First name: </strong>[[${selectedContact.getFirstName}]]
+                        </li>
                         <li class="list-group-item"><strong>Last name: </strong>[[${selectedContact.getLastName}]]</li>
                         <li class="list-group-item"><strong>Email address: </strong>[[${selectedContact.getEmail}]]</li>
-                        <li class="list-group-item"><strong>Phone number: </strong>[[${selectedContact.getPhoneNumber}]]</li>
+                        <li class="list-group-item"><strong>Phone number: </strong>[[${selectedContact.getPhoneNumber}]]
+                        </li>
                         <li class="list-group-item"><strong>Address: </strong>[[${selectedContact.getAddress}]]</li>
                     </ul>
                 </div>
@@ -79,12 +88,11 @@
                 <h6 class="mt-2"> Create new contact</h6>
                 <div class="card">
                     <div class="card-body">
-                        <!--                    <div th:if="${errorMessage != null}" class="alert alert-danger" role="alert">-->
-                        <!--                        [[${errorMessage}]]-->
-                        <!--                    </div>-->
                         <form action="#"
-                              th:action="@{${contactId == null ? '/contacts/add' : '/contacts/update?contactId='+contactId}}"
+                              th:action="@{/contacts/addOrUpdate}"
                               th:object="${contactPayload}" method="post">
+                            <input th:field="*{id}" hidden>
+                            <input th:field="*{previewContactId}" hidden >
                             <div class="form-group">
                                 <label for="inputFirstName">First name</label>
                                 <input type="text" class="form-control"
@@ -137,12 +145,16 @@
                                      th:errors="*{address}">
                                 </div>
                             </div>
-                            <button th:if="@{${contactId == null }}" type="submit" class="btn btn-success mt-2"> Add new
+                            <button th:if="@{${editId == null }}" type="submit" class="btn btn-success mt-2"> Add new
                                 contact
                             </button>
-                            <button th:if="@{${contactId != null }}" type="submit" class="btn btn-success mt-2"> Update
+                            <button th:if="@{${editId != null }}" type="submit" class="btn btn-success mt-2"> Update
                                 this contact
                             </button>
+                            <a th:if="@{${editId != null }}"
+                               th:href="@{/contacts/all?selectedContactId=__${selectedContact == null ?-1:selectedContact.getId()}__}"
+                               type="button" class="btn btn-outline-danger mt-2"> Cancel
+                            </a>
                         </form>
                     </div>
                 </div>

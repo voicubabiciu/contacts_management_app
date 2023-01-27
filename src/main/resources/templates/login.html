@@ -11,7 +11,7 @@
           integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
 </head>
-<div th:replace="components/navbar :: navbar(title='Login')"></div>
+<div th:replace="components/navbar :: navbar(title='Login', showLogout=false)"></div>
 <body class="container-fluid p-0">
 
 
@@ -20,7 +20,9 @@
 
         <div class="card">
             <div class="card-body">
-                <div th:if="${errorMessage != null}" class="alert alert-danger" role="alert">
+                <h5>Login</h5>
+                <p>Please enter your credentials to access your account and manage your contacts. If you do not have an account yet, please register to start managing your contacts efficiently. Thank you for choosing our app.</p>
+                <div th:if="${errorMessage != null}" class="alert alert-danger mt-3" role="alert">
                     [[${errorMessage}]]
                 </div>
 
@@ -35,8 +37,8 @@
                         <input type="password" class="form-control" name="password" id="inputPassword"
                                placeholder="Password" required>
                     </div>
-                    <button type="submit" class="btn btn-primary mt-2">Login</button>
-                    <a type="button" class="btn btn-outline-primary mt-2" th:href="@{/register}">Register</a>
+                    <button type="submit" class="btn btn-success mt-2">Login</button>
+                    <a type="button" class="btn btn-outline-success mt-2" th:href="@{/register}">Register</a>
                 </form>
             </div>
         </div>
