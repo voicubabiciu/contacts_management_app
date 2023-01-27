@@ -1,0 +1,69 @@
+<!--&lt;!&ndash;<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>&ndash;&gt;-->
+<!--&lt;!&ndash;<%&#45;&#45;@elvariable id="registerPayload" type="com.example.agenda.register.domain.RegisterPayload"&#45;&#45;%>&ndash;&gt;-->
+<!--&lt;!&ndash;<form:form modelAttribute="registerPayload" method="post">&ndash;&gt;-->
+<!--&lt;!&ndash;    <div>&ndash;&gt;-->
+<!--&lt;!&ndash;        <form:label path="firstName">Firstname</form:label>&ndash;&gt;-->
+<!--&lt;!&ndash;        <form:input path="firstName" type="text"/>&ndash;&gt;-->
+<!--&lt;!&ndash;        <form:errors path="firstName" cssClass="error"/>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    <div>&ndash;&gt;-->
+<!--&lt;!&ndash;        <form:label path="lastName">Lastname</form:label>&ndash;&gt;-->
+<!--&lt;!&ndash;        <form:input path="lastName" type="text"/>&ndash;&gt;-->
+<!--&lt;!&ndash;        <form:errors path="lastName" cssClass="error"/>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    <div>&ndash;&gt;-->
+<!--&lt;!&ndash;        <form:label path="email">Email</form:label>&ndash;&gt;-->
+<!--&lt;!&ndash;        <form:input path="email" type="text"/>&ndash;&gt;-->
+<!--&lt;!&ndash;        <form:errors path="email" cssClass="error"/>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    <div>&ndash;&gt;-->
+<!--&lt;!&ndash;        <form:label path="password">Password</form:label>&ndash;&gt;-->
+<!--&lt;!&ndash;        <form:input path="password" type="password"/>&ndash;&gt;-->
+<!--&lt;!&ndash;        <form:errors path="password" cssClass="error"/>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    <div>&ndash;&gt;-->
+<!--&lt;!&ndash;        <form:label path="passwordConfirmation">Confirm Password</form:label>&ndash;&gt;-->
+<!--&lt;!&ndash;        <form:input path="passwordConfirmation" type="password"/>&ndash;&gt;-->
+<!--&lt;!&ndash;        <form:errors path="passwordConfirmation" cssClass="error"/>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;<%&#45;&#45;    <div>&#45;&#45;%>&ndash;&gt;-->
+<!--&lt;!&ndash;<%&#45;&#45;        <form:errors path="passwordError" cssClass="error"/>&#45;&#45;%>&ndash;&gt;-->
+<!--&lt;!&ndash;<%&#45;&#45;    </div>&#45;&#45;%>&ndash;&gt;-->
+<!--&lt;!&ndash;    <div>&ndash;&gt;-->
+<!--&lt;!&ndash;        <input type="submit" value="Register"/>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;</form:form>&ndash;&gt;-->
+<!--<form action="#" th:action="@{/auth/register}" th:object="${registerPayload}" method="post">-->
+<!--    <div class="form-group">-->
+<!--        <label for="inputFirstName">First name</label>-->
+<!--        <input type="text" class="form-control is-invalid" id="inputFirstName" th:field="*{firstName}"-->
+<!--               placeholder="First name" required>-->
+<!--        <div class="invalid-feedback">-->
+<!--            This field is required!-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="form-group mt-2">-->
+<!--        <label for="inputLastName">Last name</label>-->
+<!--        <input type="text" class="form-control" id="inputLastName" th:field="*{lastName}"-->
+<!--               placeholder="Last name">-->
+<!--    </div>-->
+
+<!--    <div class="form-group mt-2">-->
+<!--        <label for="inputEmail">Email address</label>-->
+<!--        <input type="email" class="form-control" id="inputEmail" th:field="*{email}"-->
+<!--               aria-describedby="emailHelp" placeholder="Enter email">-->
+<!--    </div>-->
+<!--    <div class="form-group mt-2">-->
+<!--        <label for="inputPassword">Password</label>-->
+<!--        <input type="password" class="form-control" id="inputPassword" th:field="*{password}"-->
+<!--               placeholder="Password">-->
+<!--    </div>-->
+
+<!--    <div class="form-group mt-2">-->
+<!--        <label for="inputPasswordConfirmation">Password confirmation</label>-->
+<!--        <input type="password" class="form-control" id="inputPasswordConfirmation"-->
+<!--               th:field="*{passwordConfirmation}"-->
+<!--               placeholder="Password confirmation">-->
+<!--    </div>-->
+<!--    <button type="submit" class="btn btn-primary mt-2">Register</button>-->
+<!--</form>-->
